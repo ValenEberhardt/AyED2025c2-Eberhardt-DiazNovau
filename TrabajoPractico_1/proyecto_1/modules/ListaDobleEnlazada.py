@@ -3,7 +3,7 @@
 
 from modules.Nodo import Nodo
 
-class ListaDobleEnlazada():
+class ListaDobleEnlazada:
     def __init__(self):
         # Inicializar cabeza y cola de la lista doblemente enlazada
         self.cabeza = None
