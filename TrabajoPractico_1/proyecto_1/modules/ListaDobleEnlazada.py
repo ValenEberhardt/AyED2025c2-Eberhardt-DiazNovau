@@ -3,7 +3,7 @@
 
 from modules.Nodo import Nodo
 
-class ListaDobleEnlazada:
+class ListaDobleEnlazada():
     def __init__(self):
         # Inicializar cabeza y cola de la lista doblemente enlazada
         self.cabeza = None
@@ -13,6 +13,7 @@ class ListaDobleEnlazada:
     def esta_vacia(self):
         if self.cabeza is None:
             return True
+        
         return False
     
     def Agregar_inicio(self, dato):
@@ -37,8 +38,32 @@ class ListaDobleEnlazada:
             self.cola = nuevo_nodo
         self.tamano += 1
     
-    def insertar(self, posicion):
-        pass
+    def insertar(self, item, posicion):
+        if posicion == None:
+            self.Agregar_final(item)
+        
+        if posicion == 0:
+            self.Agregar_inicio(item)
+
+        if posicion > self.tamano or posicion < 0:
+            raise ValueError
+
+        if posicion > 0 and posicion < self.tamano:
+            nuevo_nodo = Nodo(item)
+            actual = self.cabeza
+
+            for i in range(posicion):
+                actual = actual.siguiente
+            
+            nuevo_nodo.anterior = actual.anterior
+            nuevo_nodo.siguiente = actual
+            actual.anterior.siguiente = nuevo_nodo
+            actual.anterior = nuevo_nodo
+            self.tamano += 1
+
+            print("Nodo actual "+ str(nuevo_nodo.dato) + " Nodo anterior " + str(nuevo_nodo.anterior) + " Nodo siguiente " + str(nuevo_nodo.siguiente))
+
+
 
     def extraer(self, posicion):
         pass
@@ -65,3 +90,5 @@ class ListaDobleEnlazada:
     
     def __iter__(self):
         pass
+
+
