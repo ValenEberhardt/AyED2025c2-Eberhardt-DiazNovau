@@ -75,8 +75,39 @@ class ListaDobleEnlazada():
 
 
 
-    def extraer(self, posicion):
-        pass
+    def extraer(self, posicion=None): #Como hacer que la posicion no se un parametro obligatorio?
+
+        if posicion == 0:
+            dato = self.cabeza.dato
+            self.cabeza = self.cabeza.siguiente
+            if self.cabeza is not None:
+                self.cabeza.anterior = None
+            else:
+                self.cola = None
+            self.tamano -= 1
+
+            return dato
+        
+
+        if posicion == self.tamano - 1 or posicion == None:
+            dato = self.cola.dato
+            self.cola = self.cola.anterior
+            if self.cola is not None:
+                self.cola.siguiente = None
+            else:
+                self.cabeza = None
+            self.tamano -= 1
+
+            return dato
+        
+        if self.esta_vacia():
+            raise ValueError("La lista está vacía")
+        if posicion < 0 or posicion >= self.tamano:
+            raise IndexError("Posición fuera de rango")
+        
+        
+
+
 
     def copiar(self):
         nueva_lista = ListaDobleEnlazada()
@@ -120,6 +151,8 @@ if __name__ == "__main__":
     prueba.Agregar_inicio(1)
 
     prueba.insertar(2, 1)
-
+    
+    prueba.extraer()
+    
     print(prueba)
 
