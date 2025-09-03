@@ -1,7 +1,17 @@
 # módulo para organizar funciones o clases utilizadas en nuestro proyecto
 # Crear tantos módulos como sea necesario para organizar el código
 
-from modules.Nodo import Nodo
+#from modules.Nodo import Nodo
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+        self.anterior = None
+
+    def __str__(self):
+        return str(self.dato)
+   
+
 
 class ListaDobleEnlazada():
     def __init__(self):
@@ -61,7 +71,7 @@ class ListaDobleEnlazada():
             actual.anterior = nuevo_nodo
             self.tamano += 1
 
-            print("Nodo actual "+ str(nuevo_nodo.dato) + " Nodo anterior " + str(nuevo_nodo.anterior) + " Nodo siguiente " + str(nuevo_nodo.siguiente))
+            #print("Nodo actual "+ nuevo_nodo.dato + " Nodo anterior " + nuevo_nodo.anterior + " Nodo siguiente " + nuevo_nodo.siguiente)
 
 
 
@@ -91,4 +101,25 @@ class ListaDobleEnlazada():
     def __iter__(self):
         pass
 
+    def __str__(self):
+        # sirve para poder mostrar el contenido de una LDE por consola con la función print
+        elementos = []
+        actual = self.cabeza
+        while actual is not None:
+            elementos.append(str(actual.dato))
+            actual = actual.siguiente
+        return " <-> ".join(elementos)
+
+
+if __name__ == "__main__":
+
+
+    prueba = ListaDobleEnlazada()
+
+    prueba.Agregar_final(3)
+    prueba.Agregar_inicio(1)
+
+    prueba.insertar(2, 1)
+
+    print(prueba)
 
