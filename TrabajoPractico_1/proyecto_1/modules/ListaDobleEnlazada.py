@@ -48,17 +48,18 @@ class ListaDobleEnlazada():
             self.cola = nuevo_nodo
         self.tamano += 1
     
-    def insertar(self, item, posicion):
+    def insertar(self, item, posicion = None): 
+
         if posicion == None:
             self.Agregar_final(item)
         
-        if posicion == 0:
+        elif posicion == 0:
             self.Agregar_inicio(item)
 
-        if posicion > self.tamano or posicion < 0:
+        elif posicion > self.tamano or posicion < 0: 
             raise ValueError
 
-        if posicion > 0 and posicion < self.tamano:
+        elif posicion > 0 and posicion < self.tamano:
             nuevo_nodo = Nodo(item)
             actual = self.cabeza
 
@@ -117,6 +118,7 @@ class ListaDobleEnlazada():
             nodo_actual = nodo_actual.siguiente
         return nueva_lista
     
+
     def invertir(self):
         pass
 
@@ -131,6 +133,7 @@ class ListaDobleEnlazada():
     
     def __iter__(self):
         pass
+
 
     def __str__(self):
         # sirve para poder mostrar el contenido de una LDE por consola con la función print
