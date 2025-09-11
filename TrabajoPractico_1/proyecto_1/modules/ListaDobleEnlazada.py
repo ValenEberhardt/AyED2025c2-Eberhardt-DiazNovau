@@ -18,7 +18,7 @@ class ListaDobleEnlazada():
         # Inicializar cabeza y cola de la lista doblemente enlazada
         self.cabeza = None
         self.cola = None
-        self.tamano = 0
+        self.tamanio = 0
 
     def esta_vacia(self):
         if self.cabeza is None:
@@ -26,7 +26,7 @@ class ListaDobleEnlazada():
         
         return False
     
-    def Agregar_inicio(self, dato):
+    def agregar_al_inicio(self, dato):
         nuevo_nodo = Nodo(dato)
         if self.esta_vacia():
             self.cabeza = nuevo_nodo
@@ -35,9 +35,9 @@ class ListaDobleEnlazada():
             nuevo_nodo.siguiente = self.cabeza
             self.cabeza.anterior = nuevo_nodo
             self.cabeza = nuevo_nodo
-        self.tamano += 1
+        self.tamanio += 1
     
-    def Agregar_final(self, dato):
+    def agregar_al_final(self, dato):
         nuevo_nodo = Nodo(dato)
         if self.esta_vacia():
             self.cabeza = nuevo_nodo
@@ -46,20 +46,20 @@ class ListaDobleEnlazada():
             nuevo_nodo.anterior = self.cola
             self.cola.siguiente = nuevo_nodo
             self.cola = nuevo_nodo
-        self.tamano += 1
+        self.tamanio += 1
     
     def insertar(self, item, posicion = None): 
 
         if posicion == None:
-            self.Agregar_final(item)
+            self.agregar_al_final(item)
         
         elif posicion == 0:
-            self.Agregar_inicio(item)
+            self.agregar_al_inicio(item)
 
-        elif posicion > self.tamano or posicion < 0: 
+        elif posicion > self.tamanio or posicion < 0: 
             raise ValueError
 
-        elif posicion > 0 and posicion < self.tamano:
+        elif posicion > 0 and posicion < self.tamanio:
             nuevo_nodo = Nodo(item)
             actual = self.cabeza
 
@@ -70,7 +70,7 @@ class ListaDobleEnlazada():
             nuevo_nodo.siguiente = actual
             actual.anterior.siguiente = nuevo_nodo
             actual.anterior = nuevo_nodo
-            self.tamano += 1
+            self.tamanio += 1
 
             #print("Nodo actual "+ nuevo_nodo.dato + " Nodo anterior " + nuevo_nodo.anterior + " Nodo siguiente " + nuevo_nodo.siguiente)
 
@@ -85,25 +85,36 @@ class ListaDobleEnlazada():
                 self.cabeza.anterior = None
             else:
                 self.cola = None
-            self.tamano -= 1
+            self.tamanio -= 1
 
             return dato
         
 
-        if posicion == self.tamano - 1 or posicion == None:
+        elif posicion == self.tamanio - 1 or posicion == None:
             dato = self.cola.dato
             self.cola = self.cola.anterior
             if self.cola is not None:
                 self.cola.siguiente = None
             else:
                 self.cabeza = None
-            self.tamano -= 1
+            self.tamanio -= 1
 
             return dato
         
-        if self.esta_vacia():
+        elif posicion > 0 and posicion < self.tamanio-1:
+            actual=self.cabeza
+            for i in range(posicion):
+                actual=actual.siguiente
+            dato=actual.dato
+            actual.anterior.siguiente=actual.siguiente
+            actual.siguiente.anterior=actual.anterior
+            self.tamanio -= 1
+            return dato
+        
+        
+        elif self.esta_vacia():
             raise ValueError("La lista está vacía")
-        if posicion < 0 or posicion >= self.tamano:
+        elif posicion < 0 or posicion >= self.tamanio:
             raise IndexError("Posición fuera de rango")
         
         
@@ -114,24 +125,45 @@ class ListaDobleEnlazada():
         nueva_lista = ListaDobleEnlazada()
         nodo_actual = self.cabeza
         while nodo_actual is not None:
-            nueva_lista.Agregar_final(nodo_actual.dato)
+            nueva_lista.agregar_al_final(nodo_actual.dato)
             nodo_actual = nodo_actual.siguiente
         return nueva_lista
     
 
     def invertir(self):
-        pass
+        actual=self.cola
+        while actual is not None:
+            actual.anterior,actual.siguiente=actual.siguiente,actual.anterior
+            actual=actual.siguiente
+        self.cola,self.cabeza=self.cabeza,self.cola
+
+        return self
+            
 
     def concatenar(self, lista):
-        pass
+        lista_alterada=self.copiar()
+        actual=lista.cabeza
+        for i in range(1, lista.tamanio):
+            lista_alterada.agregar_al_final(actual)
+            actual=actual.siguiente
+        lista_alterada.cola=actual
+
+
+        return lista_alterada
 
     def __len__(self):
-        return self.tamano
+        return self.tamanio
     
     def __add__(self, lista):
-        pass
+        self.concatenar(lista)
+        return self
+        
     
     def __iter__(self):
+        actual = self.cabeza
+        while actual is not None:
+            yield actual.dato
+            actual = actual.siguiente
         pass
 
 
@@ -142,7 +174,7 @@ class ListaDobleEnlazada():
         while actual is not None:
             elementos.append(str(actual.dato))
             actual = actual.siguiente
-        return " <-> ".join(elementos)
+        return " <> ".join(elementos)
 
 
 if __name__ == "__main__":
@@ -150,12 +182,11 @@ if __name__ == "__main__":
 
     prueba = ListaDobleEnlazada()
 
-    prueba.Agregar_final(3)
-    prueba.Agregar_inicio(1)
+    prueba.agregar_al_final(3)
+    prueba.agregar_al_inicio(1)
 
     prueba.insertar(2, 1)
     
-    prueba.extraer()
-    
+    prueba.invertir()
     print(prueba)
 
