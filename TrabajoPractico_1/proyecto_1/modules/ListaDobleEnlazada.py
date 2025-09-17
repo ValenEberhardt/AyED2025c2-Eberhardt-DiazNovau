@@ -141,15 +141,15 @@ class ListaDobleEnlazada():
             
 
     def concatenar(self, lista):
-        lista_alterada=self.copiar()
+        #lista_alterada=self.copiar()
         actual=lista.cabeza
-        for i in range(1, lista.tamanio):
-            lista_alterada.agregar_al_final(actual)
+        #for i in range(1, lista.tamanio):
+        while actual:  # actual is not none
+            self.agregar_al_final(actual.dato)
             actual=actual.siguiente
-        lista_alterada.cola=actual
+        #lista_alterada.cola=actual
 
-
-        return lista_alterada
+        return self
 
     def __len__(self):
         return self.tamanio
@@ -180,13 +180,26 @@ class ListaDobleEnlazada():
 if __name__ == "__main__":
 
 
-    prueba = ListaDobleEnlazada()
+    prueba_1 = ListaDobleEnlazada()
+    prueba_2 = ListaDobleEnlazada()
 
-    prueba.agregar_al_final(3)
-    prueba.agregar_al_inicio(1)
+    prueba_1.agregar_al_final(1)
+    prueba_1.agregar_al_final(2)
+    prueba_1.agregar_al_final(3)
+    prueba_1.agregar_al_final(4)
 
-    prueba.insertar(2, 1)
+    print("prueba_1: " , prueba_1)
+
+    prueba_2.agregar_al_final(5)
+    prueba_2.agregar_al_final(6)
+    prueba_2.agregar_al_final(7)
+    prueba_2.agregar_al_final(8)
+
+    print("prueba_2: " , prueba_2)
+
+    print("\n Copiar prueba_1: " , prueba_1.copiar())
+
+    print("concatenar ", prueba_1.concatenar(prueba_2))
     
-    prueba.invertir()
-    print(prueba)
+
 
