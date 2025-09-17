@@ -1,4 +1,4 @@
-from modules.LDE import ListaDobleEnlazada  # Importa la clase ListaDobleEnlazada
+from modules.ListaDobleEnlazada import ListaDobleEnlazada  # Importa la clase ListaDobleEnlazada
 
 class DequeEmptyError(Exception):
     pass  # Define una excepción personalizada para cuando el mazo está vacío
