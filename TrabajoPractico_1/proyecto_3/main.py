@@ -1,0 +1,2 @@
+from modules import ordenamiento_burbuja
+from modules import ordenamiento_quicksort
