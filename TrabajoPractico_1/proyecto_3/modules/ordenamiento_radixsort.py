@@ -45,6 +45,7 @@ def radix_sort(lista):
         countig_sort(lista, pos_dig)
         pos_dig *= 10
         max_d -= 1
+    return lista
 
 
 if __name__ == "__main__":

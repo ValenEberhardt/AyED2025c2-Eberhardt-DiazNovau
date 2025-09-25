@@ -20,7 +20,10 @@ def ordenamiento_burbuja_corto(lista):
 
 if __name__ == '__main__':
     # ordena numeros y palabras
-
-    numeros = [5, 3, 8, 6, 7, 2]
+    numeros = []
+    for i in range(700):
+        n = randint(1,1000)
+        numeros.append(n)    
+    print("Lista desordenada " , numeros)
     numeros = ordenamiento_burbuja(numeros)
-    print(numeros)
+    print("\nLista ordenada " , numeros)
