@@ -4,7 +4,7 @@ Repositorio inicial para las clases de práctica de Algoritmos y Estructuras de 
 
 ## Integrantes del grupo:
     - Eberhardt, Valentin
-    - Apellido y Nombre del segundo integrante
+    - Diaz Novau, A. Emanuel
 
 ## Cuatrimestre de cursado:
-    1er/2do cuatrimestre del 20xx
+   2do cuatrimestre del 2025

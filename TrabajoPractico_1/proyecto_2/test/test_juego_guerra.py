@@ -1,3 +1,8 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# Corrección de imports para que funcionen en el entorno de pruebas
+
 # -*- coding: utf-8 -*-
 """
 Created on Sun Aug 21 11:23:53 2022
