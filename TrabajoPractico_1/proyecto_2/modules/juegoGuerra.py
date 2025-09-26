@@ -1,5 +1,9 @@
-from mazo import Mazo, DequeEmptyError
-from carta import Carta
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from modules.mazo import Mazo, DequeEmptyError
+from modules.carta import Carta
 import random
 
 N_TURNOS = 10000
