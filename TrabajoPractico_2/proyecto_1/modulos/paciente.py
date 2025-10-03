@@ -34,6 +34,17 @@ class Paciente:
         cad += str(self.__riesgo) + '-' + self.__descripcion
         return cad
         
+    def __lt__(self, otro):
+
+        if self.get_riesgo() < otro.get_riesgo():
+            return True
         
-        
-        
+if __name__ == "__main__":
+    p1 = Paciente()
+    p2 = Paciente()
+
+    print(p1.get_riesgo())
+    print(p2.get_riesgo())
+
+    if p1 < p2:
+        print("p1 menor que p2")

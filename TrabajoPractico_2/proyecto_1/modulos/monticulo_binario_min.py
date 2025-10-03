@@ -14,11 +14,11 @@ class MonticuloBinarioMin:
                 tmp = self.monticulo[i // 2]
                 self.monticulo[i//2] = self.monticulo[i]
                 self.monticulo[i] = tmp
-        i = i//2
+            i = i//2
 
     def insertar(self,k):
         self.monticulo.append(k)
-        self.tamano =+ 1
+        self.tamano = self.tamano + 1
         self.infiltArriba(self.tamano)
     
     def infiltAbajo(self, i):
@@ -58,11 +58,18 @@ class MonticuloBinarioMin:
             self.infiltAbajo(i)
             i = i - 1
 
+    def __iter__(self):
+        for i in range(1, self.tamano +1):
+            yield self.monticulo[i]
 
 
 if __name__ == "__main__":
     miMonticulo = MonticuloBinarioMin()
-    miMonticulo.construirMonticulo([9,5,6,2,3])
+    miMonticulo.insertar(9)
+    miMonticulo.insertar(5)
+    miMonticulo.insertar(6)
+    miMonticulo.insertar(2)
+    miMonticulo.insertar(3)
 
     print(miMonticulo.eliminarMin())
     print(miMonticulo.eliminarMin())
