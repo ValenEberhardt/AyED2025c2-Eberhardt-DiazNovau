@@ -39,7 +39,7 @@ for i in range(n):
     print()
 
     # Se muestran los pacientes restantes en la cola de espera
-    print('Pacientes que faltan atenderse:', len(cola_de_espera))
+    print('Pacientes que faltan atenderse:', len(cola_de_espera)-1) #porque estaba tomando uno de mas (el 0)
     for paciente in cola_de_espera:
         print('\t', paciente)
     
