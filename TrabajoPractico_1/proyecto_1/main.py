@@ -50,7 +50,7 @@ plt.legend()
 plt.grid()
 plt.show()
 """
-
+""""""
 lista = ListaDobleEnlazada()
 
 def medir_tiempo(funcion, lista):
@@ -59,7 +59,8 @@ def medir_tiempo(funcion, lista):
     fin = time.time()
     return fin - inicio
 
-tam_listas = [11, 123, 544, 1386, 5753, 13798]
+#tam_listas = [11, 123, 544, 1386, 5753, 13798]
+tam_listas = range(1, 1000, 20)
 tiempos_len = []
 tiempos_copiar = []
 tiempos_invertir = []

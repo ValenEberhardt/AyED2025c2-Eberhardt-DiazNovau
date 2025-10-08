@@ -20,7 +20,7 @@ plt.figure(figsize=(10, 6))
 #Ordenamiento burbuja
 
 for n in tamanios:
-    numeros = [randint(1, 10000) for _ in range(n)]
+    numeros = [randint(10000, 99999) for _ in range(n)]
     
     inicio = time.perf_counter()
     burbuja_numeros = ordenamiento_burbuja(numeros)
@@ -31,7 +31,7 @@ for n in tamanios:
 #Ordenamiento quicksort
 
 for n in tamanios:
-    numeros = [randint(1, 10000) for _ in range(n)]
+    numeros = [randint(10000, 999999) for _ in range(n)]
     
     inicio = time.perf_counter()
     quicksort_numeros = quicksort(numeros)
@@ -42,7 +42,7 @@ for n in tamanios:
 #Ordenamiento RadixSort
 
 for n in tamanios:
-    numeros = [randint(1, 10000) for _ in range(n)]
+    numeros = [randint(10000, 999999) for _ in range(n)]
     
     inicio = time.perf_counter()
     radix_sort_numeros = radix_sort(numeros)
@@ -52,7 +52,7 @@ for n in tamanios:
 
 #Ordenamiento de listas incorporadas en python
 for n in tamanios:
-    numeros = [randint(1, 10000) for _ in range(n)]
+    numeros = [randint(10000, 999999) for _ in range(n)]
     
     inicio = time.perf_counter()
     numeros.sort
