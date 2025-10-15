@@ -21,9 +21,16 @@ def ordenamiento_burbuja_corto(lista):
 if __name__ == '__main__':
     # ordena numeros y palabras
     numeros = []
-    for i in range(700):
-        n = randint(1,1000)
+    for i in range(3):
+        n = randint(10000,99999)
         numeros.append(n)    
-    print("Lista desordenada " , numeros)
-    numeros = ordenamiento_burbuja(numeros)
-    print("\nLista ordenada " , numeros)
+    
+    numeros_burbuja = ordenamiento_burbuja(numeros)
+    numeros_sort = numeros.sort #prueba ordenar los numeros con la funcion de listas de python
+
+    print(numeros_burbuja)
+    print("\n", numeros_sort)
+    if numeros_burbuja == numeros_sort:
+        print("EL ordenamiento burbuja funciona")
+
+    

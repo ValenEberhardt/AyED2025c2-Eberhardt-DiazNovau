@@ -54,8 +54,26 @@ class ArbolAVL:
                 nodo.padre.factorEquilibrio -= 1
             
             if nodo.padre.factorEquilibrio != 0:
-                self.actualizarEquilibrio()
+                self.actualizarEquilibrio(nodo.padre)
+    
 
+    def rotarIzquierda(self, rotRaiz):
+        nuevaRaiz = rotRaiz.hijoDerecho
+        rotRaiz.hijoDerecho = nuevaRaiz.hijoIzquierdo ##Diagrama
+        if nuevaRaiz.hijoIzquierdo != None:
+            nuevaRaiz.hijoIzquierdo.padre = rotRaiz ##como? volvió a lo mismo?
+        nuevaRaiz.padre = rotRaiz.padre
+        if rotRaiz.esRaiz():
+            self.raiz = nuevaRaiz
+        else:
+            if rotRaiz.esHijoIzquierdo():
+                rotRaiz.padre.hijoIzquierdo = nuevaRaiz
+            else:
+                rotRaiz.padre.hijoDerecho = nuevaRaiz
+        nuevaRaiz.hijoIzquierdo = rotRaiz
+        rotRaiz.factorEquilibrio = rotRaiz.factorEquilibrio + 1 - min(nuevaRaiz.factorEquilibrio, 0)
+        nuevaRaiz.factorEquilbrio = nuevaRaiz.factorEquilibrio +1 - min(rotRaiz.factorEquilibrio, 0)
+        
 
 
 
