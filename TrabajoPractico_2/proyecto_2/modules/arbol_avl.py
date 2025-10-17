@@ -35,7 +35,7 @@ class ArbolAVL:
             if nodoActual.tieneHijoIzquierdo():
                 self._agregar(clave, valor, nodoActual.hijoIzquierdo)
             else:
-                nodoActual.HijoIzquierdo = NodoArbol(clave, valor, padre = nodoActual)
+                nodoActual.hijoIzquierdo = NodoArbol(clave, valor, padre = nodoActual)
                 self.actualizarEquilibrio(nodoActual.hijoIzquierdo)
         else:
             if nodoActual.tieneHijoDerecho():
@@ -46,6 +46,7 @@ class ArbolAVL:
         
 
     def actualizarEquilibrio(self, nodo):
+
         if nodo.factorEquilibrio > 1  or nodo.factorEquilibrio < -1:
             self.reequilibrar(nodo)
             return
@@ -61,11 +62,11 @@ class ArbolAVL:
 
     def rotarIzquierda(self, rotRaiz):
         nuevaRaiz = rotRaiz.hijoDerecho
-       # if nuevaRaiz is None:
-        #    return
-        rotRaiz.hijoDerecho = nuevaRaiz.hijoIzquierdo ##Diagrama
+      #  if nuevaRaiz is None:
+       #     return
+        rotRaiz.hijoDerecho = nuevaRaiz.hijoIzquierdo
         if nuevaRaiz.hijoIzquierdo != None:
-            nuevaRaiz.hijoIzquierdo.padre = rotRaiz ##como? volvió a lo mismo?
+            nuevaRaiz.hijoIzquierdo.padre = rotRaiz 
         nuevaRaiz.padre = rotRaiz.padre
         if rotRaiz.esRaiz():
             self.raiz = nuevaRaiz
@@ -81,9 +82,9 @@ class ArbolAVL:
 
 
     def rotarDerecha(self, rotRaiz):
-        nuevaRaiz = rotRaiz.hijoDerecho
-        #if nuevaRaiz is None:
-        #    return
+        nuevaRaiz = rotRaiz.hijoIzquierdo
+ #       if nuevaRaiz is None:
+  #          return
         rotRaiz.hijoIzquierdo = nuevaRaiz.hijoDerecho
         if nuevaRaiz.hijoDerecho != None:
             nuevaRaiz.hijoDerecho.padre = rotRaiz
@@ -223,10 +224,11 @@ if __name__ == "__main__":
      #arbol.agregar(2, 2)
      #arbol.agregar(3, 3)
 
-     arbol.agregar(3, 3)
-     arbol.agregar(2, 2)
-     arbol.agregar(4, 4)
-     #arbol.agregar(1, 1)
+     arbol.agregar(9, 9)
+     arbol.agregar(7, 7)
+     arbol.agregar(5, 5)
 
      print(arbol.raiz.clave)
+     print(arbol.raiz.hijoIzquierdo.clave, arbol.raiz.hijoDerecho.clave)
+    
 
