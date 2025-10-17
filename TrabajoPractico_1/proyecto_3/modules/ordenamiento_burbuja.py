@@ -26,7 +26,7 @@ if __name__ == '__main__':
         numeros.append(n)    
     
     numeros_burbuja = ordenamiento_burbuja(numeros)
-    numeros_sort = numeros.sort #prueba ordenar los numeros con la funcion de listas de python
+    numeros_sort = sorted(numeros) #prueba ordenar los numeros con la funcion de listas de python
 
     print(numeros_burbuja)
     print("\n", numeros_sort)
