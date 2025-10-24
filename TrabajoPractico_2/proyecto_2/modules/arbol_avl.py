@@ -18,6 +18,32 @@ class ArbolAVL:
         return self.raiz.__iter__()
     
 
+
+
+    def obtener(self, clave):
+        if self.raiz:
+            res = self._obtener(clave, self.raiz)
+            if res:
+                return res.valor
+            else:
+                return None
+        else:
+            return None
+        
+    
+
+    def _obtener(self,clave, nodoActual):
+        if not nodoActual:
+           return None
+        elif nodoActual.clave == clave:
+           return nodoActual
+        elif clave < nodoActual.clave:
+           return self._obtener(clave,nodoActual.hijoIzquierdo)
+        else:
+           return self._obtener(clave,nodoActual.hijoDerecho)
+
+
+
     def agregar(self, clave, valor):
         if self.raiz:
             self._agregar(clave, valor, self.raiz)
@@ -228,7 +254,7 @@ if __name__ == "__main__":
      arbol.agregar(7, 7)
      arbol.agregar(5, 5)
 
-     print(arbol.raiz.clave)
+     print(arbol.obtener(5))
      print(arbol.raiz.hijoIzquierdo.clave, arbol.raiz.hijoDerecho.clave)
     
 
