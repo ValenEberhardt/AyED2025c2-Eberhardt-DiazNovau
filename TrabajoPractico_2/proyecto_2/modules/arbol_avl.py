@@ -18,6 +18,68 @@ class ArbolAVL:
         return self.raiz.__iter__()
     
 
+    def __delitem__(self, clave):
+        self.eliminar(clave)
+
+
+    def eliminar(self, clave):
+        if self.tamano > 1:
+            nodoAEliminar = self._obtener(clave, self.raiz)
+            if nodoAEliminar:
+                self.remover(nodoAEliminar)
+                self.tamano = self.tamano - 1
+            else:
+                raise KeyError('Error, la clave no está en arbol')
+        elif self.tamano == 1 and self.raiz.clave == clave:
+            self.raiz = None
+            self.tamano = self.tamano -1
+        else:
+            raise KeyError('Error, la clave no esta en el arbol')
+        self.actualizarEquilibrio(nodoAEliminar)
+    
+
+
+    def remover(self,nodoActual):
+         if nodoActual.esHoja(): #hoja
+           if nodoActual == nodoActual.padre.hijoIzquierdo:
+               nodoActual.padre.hijoIzquierdo = None
+           else:
+               nodoActual.padre.hijoDerecho = None
+         elif nodoActual.tieneAmbosHijos(): #interior
+           suc = nodoActual.encontrarSucesor()
+           suc.empalmar()
+           nodoActual.clave = suc.clave
+           nodoActual.valor = suc.valor #cargaUtil = valor
+
+         else: # este nodo tiene un (1) hijo
+           if nodoActual.tieneHijoIzquierdo():
+             if nodoActual.esHijoIzquierdo():
+                 nodoActual.hijoIzquierdo.padre = nodoActual.padre
+                 nodoActual.padre.hijoIzquierdo = nodoActual.hijoIzquierdo
+             elif nodoActual.esHijoDerecho():
+                 nodoActual.hijoIzquierdo.padre = nodoActual.padre
+                 nodoActual.padre.hijoDerecho = nodoActual.hijoIzquierdo
+             else:
+                 nodoActual.reemplazarDatoDeNodo(nodoActual.hijoIzquierdo.clave,
+                                    nodoActual.hijoIzquierdo.valor,
+                                    nodoActual.hijoIzquierdo.hijoIzquierdo,
+                                    nodoActual.hijoIzquierdo.hijoDerecho)
+           else:
+             if nodoActual.esHijoIzquierdo():
+                 nodoActual.hijoDerecho.padre = nodoActual.padre
+                 nodoActual.padre.hijoIzquierdo = nodoActual.hijoDerecho
+             elif nodoActual.esHijoDerecho():
+                 nodoActual.hijoDerecho.padre = nodoActual.padre
+                 nodoActual.padre.hijoDerecho = nodoActual.hijoDerecho
+             else:
+                 nodoActual.reemplazarDatoDeNodo(nodoActual.hijoDerecho.clave,
+                                    nodoActual.hijoDerecho.valor,
+                                    nodoActual.hijoDerecho.hijoIzquierdo,
+                                    nodoActual.hijoDerecho.hijoDerecho)
+
+            
+
+
 
 
     def obtener(self, clave):
@@ -34,13 +96,13 @@ class ArbolAVL:
 
     def _obtener(self,clave, nodoActual):
         if not nodoActual:
-           return None
+            return None
         elif nodoActual.clave == clave:
-           return nodoActual
+            return nodoActual
         elif clave < nodoActual.clave:
-           return self._obtener(clave,nodoActual.hijoIzquierdo)
+            return self._obtener(clave,nodoActual.hijoIzquierdo)
         else:
-           return self._obtener(clave,nodoActual.hijoDerecho)
+            return self._obtener(clave,nodoActual.hijoDerecho)
 
 
 
@@ -49,7 +111,7 @@ class ArbolAVL:
             self._agregar(clave, valor, self.raiz)
         else:
             self.raiz = NodoArbol(clave, valor)
-            self.tamano =+ 1
+        self.tamano += 1
     
 
     def __setitem__(self, c, v):
@@ -159,6 +221,19 @@ class NodoArbol:
         self.padre = padre
         self.factorEquilibrio = 0
     
+    def __iter__(self):
+        if self:
+            if self.tieneHijoIzquierdo():
+                
+                for elem in self.hijoIzquierdo:
+                    yield elem
+            yield self.clave
+            if self.tieneHijoDerecho():
+                for elem in self.hijoDerecho:
+                    yield elem
+
+
+                    
 
     def tieneHijoIzquierdo(self):
         return self.hijoIzquierdo
@@ -166,6 +241,9 @@ class NodoArbol:
 
     def tieneHijoDerecho(self):
         return self.hijoDerecho
+    
+    def tieneAmbosHijos(self):
+        return self.hijoDerecho is not None and self.hijoIzquierdo is not None
     
 
     def esHijoIzquierdo(self):
@@ -185,7 +263,7 @@ class NodoArbol:
     
 
     def tieneHijo(self):
-        return self.hijoDerecho or self.hijoIzquierdo
+        return self.hijoDerecho is not None or self.hijoIzquierdo is not None
     
 
     def ReemplazarDatos(self, clave, valor, hijo_izq, hijo_der):
@@ -221,24 +299,26 @@ class NodoArbol:
     
 
     def empalmar(self):
-        if self.esHoja():
-            if self.esHijoIzquierdo():
-                self.padre.hijoIzquierdo = None
-            else:
-                self.padre.hijoDerecho = None
-        elif self.tieneAlgunHijo():
-            if self.tieneHijoIzquierdo():
-                if self.esHijoIzquierdo():
-                    self.padre.hijoIzquierdo = self.hijoIzquierdo
-                else:
-                    self.padre.hijoDerecho = self.hijoIzquierdo
-                self.hijoIzquierdo.padre = self.padre
-            else:
-                if self.esHijoIzquierdo():
-                    self.padre.hijoIzquierdo = self.hijoDerecho
-                else:
-                    self.padre.hijoDerecho = self.hijoDerecho
-                self.hijoDerecho.padre = self.padre
+       if self.esHoja():
+           if self.esHijoIzquierdo():
+                  self.padre.hijoIzquierdo = None
+           else:
+                  self.padre.hijoDerecho = None
+       elif self.tieneAlgunHijo():
+           if self.tieneHijoIzquierdo():
+                  if self.esHijoIzquierdo():
+                     self.padre.hijoIzquierdo = self.hijoIzquierdo
+                  else:
+                     self.padre.hijoDerecho = self.hijoIzquierdo
+                  self.hijoIzquierdo.padre = self.padre
+           else:
+                  if self.esHijoIzquierdo():
+                     self.padre.hijoIzquierdo = self.hijoDerecho
+                  else:
+                     self.padre.hijoDerecho = self.hijoDerecho
+                  self.hijoDerecho.padre = self.padre
+
+
 
 
 
@@ -254,7 +334,12 @@ if __name__ == "__main__":
      arbol.agregar(7, 7)
      arbol.agregar(5, 5)
 
-     print(arbol.obtener(5))
-     print(arbol.raiz.hijoIzquierdo.clave, arbol.raiz.hijoDerecho.clave)
+     arbol.eliminar(9)
+
+     for i in arbol:
+         print(i)
+
+    #
+     
     
 
