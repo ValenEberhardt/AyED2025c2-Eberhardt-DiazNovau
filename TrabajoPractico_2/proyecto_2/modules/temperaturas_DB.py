@@ -92,7 +92,9 @@ class Temperturas_DB:
     def devolver_temperaturas(self, fecha1, fecha2):
         fecha1_dt = self.formato_fecha(fecha1)
         fecha2_dt = self.formato_fecha(fecha2)
+
         temps = []
+
         while fecha1_dt <= fecha2_dt:
             temp = self.temperaturas.obtener(fecha1_dt)
 
@@ -105,8 +107,9 @@ class Temperturas_DB:
 
 
     def cantidad_muestras(self):
-        
-        pass
+        self.temperaturas.longitud()
+
+
 
 if __name__ == "__main__":
      
@@ -118,6 +121,10 @@ if __name__ == "__main__":
 
     fecha1 = "21/04/2025"
     fecha2 = "25/05/2025"
+
+    print(temp.devolver_temperaturas(fecha1, fecha2))
+
+    temp.borrar_temperatura(fecha1)
    
     print(temp.devolver_temperaturas(fecha1, fecha2))
         
