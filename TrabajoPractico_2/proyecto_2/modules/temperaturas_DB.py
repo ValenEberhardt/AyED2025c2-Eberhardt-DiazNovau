@@ -124,7 +124,8 @@ if __name__ == "__main__":
 
     print(temp.devolver_temperaturas(fecha1, fecha2))
 
-    temp.borrar_temperatura(fecha1)
+    temp.borrar_temperatura(fecha2)
+    temp.borrar_temperatura("29/04/2025")
    
     print(temp.devolver_temperaturas(fecha1, fecha2))
         

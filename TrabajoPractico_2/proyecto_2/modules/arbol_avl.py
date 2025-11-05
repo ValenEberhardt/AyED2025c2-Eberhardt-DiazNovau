@@ -162,6 +162,9 @@ class ArbolAVL:
             else:
                 rotRaiz.padre.hijoDerecho = nuevaRaiz
         nuevaRaiz.hijoIzquierdo = rotRaiz
+
+        rotRaiz.padre = nuevaRaiz           ###
+
         rotRaiz.factorEquilibrio = rotRaiz.factorEquilibrio + 1 - min(nuevaRaiz.factorEquilibrio, 0)
         nuevaRaiz.factorEquilibrio = nuevaRaiz.factorEquilibrio +1 - max(rotRaiz.factorEquilibrio, 0)
 
@@ -183,6 +186,9 @@ class ArbolAVL:
             else:
                 rotRaiz.padre.hijoIzquierdo = nuevaRaiz
         nuevaRaiz.hijoDerecho = rotRaiz
+
+        rotRaiz.padre = nuevaRaiz           ###
+
         rotRaiz.factorEquilibrio = rotRaiz.factorEquilibrio + 1 - min(nuevaRaiz.factorEquilibrio, 0)
         nuevaRaiz.factorEquilibrio = nuevaRaiz.factorEquilibrio +1 - max(rotRaiz.factorEquilibrio, 0)
             
