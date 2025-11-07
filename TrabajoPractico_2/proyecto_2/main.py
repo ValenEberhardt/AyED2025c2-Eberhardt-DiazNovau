@@ -10,7 +10,7 @@ with open(ruta, "r") as texto:
     # fecha, temp = linea.strip().split(";")
     # print(fecha)
     for linea in texto:
-        fecha, temp = linea.split(";")
+        fecha, temp = linea.strip().split(";")
         db.guardar_temperatura(temp, fecha)
 
 
@@ -30,11 +30,20 @@ fecha1 = '01/01/2025'
 fecha2 = '31/01/2025'
 max = db.max_temp_rango(fecha1, fecha2)
 min = db.min_temp_rango(fecha1, fecha2)
-print("Maxima del mes de enero: ", max, "Minima del mes de enero:", min)
+print("Maxima del mes de enero: ", max, "\nMinima del mes de enero:", min)
 
 #Temperatura minima y maxima en una misma funcion
 min, max = db.temp_extremos_rango(fecha1, fecha2) #('11.9\n', '39.5\n')
 print(min, max)
+
+# Borrar temperatura (fecha):
+print("Temperatura Máxima borrada:")
+db.borrar_temperatura('28/01/2025')
+min, max = db.temp_extremos_rango(fecha1, fecha2)
+print(min, max)
+
+#Cantidad de Muestras:
+print("Cantidad total de muestras:", db.cantidad_muestras())
 
 
 
