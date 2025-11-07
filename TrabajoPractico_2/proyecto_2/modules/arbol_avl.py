@@ -338,10 +338,8 @@ if __name__ == "__main__":
      arbol.agregar(7, 7)
      arbol.agregar(5, 5)
 
-     arbol.eliminar(9)
-
-     for i in arbol:
-         print(i)
+     print(len(arbol))
+     print(arbol.longitud())
 
     #
 

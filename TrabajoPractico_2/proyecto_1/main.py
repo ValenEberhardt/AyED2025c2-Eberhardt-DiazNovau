@@ -22,7 +22,7 @@ for i in range(n):
 
     # Se crea un paciente un paciente por segundo
     # La criticidad del paciente es aleatoria
-    paciente = pac.Paciente()
+    paciente = pac.Paciente(fecha_y_hora)
     cola_de_espera.agregar(paciente)
 
     # Atención de paciente en este ciclo: en el 50% de los casos

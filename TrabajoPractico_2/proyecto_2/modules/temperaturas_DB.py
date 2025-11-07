@@ -107,7 +107,8 @@ class Temperturas_DB:
 
 
     def cantidad_muestras(self):
-        self.temperaturas.longitud()
+        
+        return self.temperaturas.longitud()
 
 
 
@@ -128,4 +129,4 @@ if __name__ == "__main__":
     temp.borrar_temperatura("29/04/2025")
    
     print(temp.devolver_temperaturas(fecha1, fecha2))
-        
+    print(temp.cantidad_muestras())
