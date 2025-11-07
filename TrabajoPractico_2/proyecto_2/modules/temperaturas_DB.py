@@ -71,13 +71,11 @@ class Temperturas_DB:
 
 
     def temp_extremos_rango(self, fecha1, fecha2):
-        fecha1_dt = self.formato_fecha(fecha1) 
-        fecha2_dt = self.formato_fecha(fecha2)
 
-        minima = self.min_temp_rango(fecha1_dt, fecha2_dt) 
-        maxima = self.max_temp_rango(fecha1_dt, fecha2_dt)
+        minima = self.min_temp_rango(fecha1, fecha2) 
+        maxima = self.max_temp_rango(fecha1, fecha2)
         
-        return minima, maxima
+        return minima,maxima
 
 
 
